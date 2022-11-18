@@ -38,26 +38,6 @@
     "implicit-arrow-linebreak": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
-    "import/order": [
-      "error",
-      {
-        "newlines-between": "always-and-inside-groups",
-        "distinctGroup": true,
-        "groups": [
-          [
-            "external",
-            "builtin"
-          ],
-          [
-            "internal",
-            "sibling",
-            "parent",
-            "index"
-          ],
-          "type"
-        ]
-      }
-    ],
     "import/prefer-default-export": "off",
     "linebreak-style": "off",
     "no-param-reassign": "off",
