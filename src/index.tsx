@@ -12,3 +12,4 @@ root.render(
     <App/>
   </React.StrictMode>
 );
+export {findBest} from "./helpers/findBest";

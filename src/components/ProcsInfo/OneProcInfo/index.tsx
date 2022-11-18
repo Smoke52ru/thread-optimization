@@ -1,12 +1,9 @@
 import React from 'react';
 import {Chart} from "react-google-charts";
 import {Card} from "antd";
-import {TProcess} from "../../../helpers/types";
-import {maxDuration} from "../../../helpers/constants";
-
-interface TOneProcInfoProps {
-  procs: TProcess[]
-}
+import {IProcsProps, TProcess} from "helpers/types";
+import {maxDuration} from "helpers/constants";
+import {calcAvgs} from "helpers/calcAvgs";
 
 const makeData = (procs: TProcess[]) => {
   type chunk = {
@@ -37,8 +34,9 @@ const makeData = (procs: TProcess[]) => {
   ]
 }
 
-const OneProcInfo = ({procs}: TOneProcInfoProps) => {
+const OneProcInfo = ({procs}: IProcsProps) => {
   const title = JSON.stringify(procs.map(({duration}) => duration));
+  const avgs = calcAvgs(procs)
   const data = makeData(procs)
   const options = {
     vAxis: {
@@ -50,8 +48,10 @@ const OneProcInfo = ({procs}: TOneProcInfoProps) => {
 
   return (
     <Card title={title}>
+      <p>Ср. время ожидания: {avgs.waiting.toFixed(2)}</p>
+      <p>Ср. время выполнения: {avgs.running.toFixed(2)}</p>
       <Chart chartType="CandlestickChart"
-             width="100px"
+             width="100%"
              height="400px"
              data={data}
              options={options}
