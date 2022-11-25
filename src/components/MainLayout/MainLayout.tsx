@@ -1,5 +1,5 @@
 import React from "react";
-import {Layout} from "antd";
+import {Layout, Space} from "antd";
 import {Link, Outlet} from "react-router-dom";
 import {routes} from "routing/routes";
 
@@ -9,7 +9,10 @@ export const MainLayout = () =>
   (
     <Layout>
       <Header>
-        <Link to={routes.permutations}>Permutations</Link>
+        <Space>
+          <Link to={routes.permutations}>Permutations</Link>
+          <Link to={routes.distribution}>Distribution</Link>
+        </Space>
       </Header>
       <Content>
         <Outlet/>

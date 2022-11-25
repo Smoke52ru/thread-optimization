@@ -4,6 +4,7 @@ import {Navigate, RouteObject} from "react-router-dom";
 import {routes} from 'routing/routes';
 import {MainLayout} from "components/MainLayout/MainLayout";
 import ProcessPermutation from "components/ProcessPermutation";
+import ProcessDistribution from "../components/ProcessDistribution";
 
 export const RoutingConfig: RouteObject[] = [
     {
@@ -17,6 +18,10 @@ export const RoutingConfig: RouteObject[] = [
         {
           path: routes.permutations,
           element: <ProcessPermutation/>,
+        },
+        {
+          path: routes.distribution,
+          element: <ProcessDistribution/>
         },
       ],
     },
