@@ -5,9 +5,9 @@ import {constructProcs} from "helpers/constructProcs";
 import {TProcess} from "helpers/types";
 import {maxDuration, minDuration} from "helpers/constants";
 import {ProcsInfo} from "./ProcsInfo";
-import './App.scss'
+import './index.scss'
 
-const App = () => {
+const ProcessPermutationComponent = () => {
   const [procCount, setProcCount] = useState(3)
   const [procs, setProcs] = useState<TProcess[]>(constructProcs(procCount))
   const [readyToSimulate, setReady] = useState(false)
@@ -67,4 +67,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ProcessPermutationComponent;

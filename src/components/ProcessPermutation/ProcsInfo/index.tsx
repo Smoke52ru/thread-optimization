@@ -3,7 +3,7 @@ import {Divider, Space} from "antd";
 import {Permutation} from "js-combinatorics";
 import {IProcsProps, TProcess} from "helpers/types";
 import OneProcInfo from "./OneProcInfo";
-import {findBest} from "../../helpers/findBest";
+import {findBest} from "../../../helpers/findBest";
 
 export const ProcsInfo = ({procs, showAll}: IProcsProps & { showAll: boolean }) => {
   const [permutations] = useState<TProcess[][]>([...new Permutation(procs)])
