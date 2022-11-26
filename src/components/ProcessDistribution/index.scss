@@ -1,0 +1,32 @@
+.container {
+  padding: 16px;
+}
+
+.card {
+  width: 90px;
+
+  .input {
+    max-width: 100%;
+  }
+}
+
+.processBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.processBarItem {
+  outline: black solid 1px;
+  border-bottom: black solid 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: lightblue;
+  cursor: crosshair;
+  padding: 5px;
+
+  &:hover {
+    background: mediumpurple;
+  }
+}
