@@ -195,7 +195,7 @@ const ProcessDistribution: FC = () => {
           {tableValues.map((row, index)=>(
             <tr key={index}>
               {row.map((cell)=>(
-                <td>{cell.join(',')}</td>
+                <td>{cell.map((val)=>val.length).join(',')}</td>
               ))}
             </tr>
           ))}
