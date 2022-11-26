@@ -63,6 +63,7 @@ const ProcessDistribution: FC = () => {
 
   const distribute = (cpuNumber: number, data: TProcData[]): TCPUData[] => {
     const cpus: TCPUData[] = []
+    const prevValues:TProcData[][][] = []
   
     for (let i = 0; i < cpuNumber; i += 1) {
       cpus.push({data: [], length: 0})
@@ -81,8 +82,8 @@ const ProcessDistribution: FC = () => {
       cpus[minIndex].data.push(item)
       cpus[minIndex].length += item.length
   
-      setTableValues((prevState) => {
-        const res = [...prevState]
+      setTableValues(() => {
+        const res = [...prevValues]
         
         res.push([...Array(cpuNumber)].map(()=>([])))
         const last = res.reduce<TProcData[]>((prev, cur):TProcData[]=>{
