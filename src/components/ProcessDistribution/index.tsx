@@ -55,6 +55,12 @@ const ProcessBar: FC<TProcessBarProps> = ({procData}) =>
   </div>
 
 const ProcessDistribution: FC = () => {
+  const [procCount, setProcCount] = useState(10)
+  const [procData, setProcData] = useState<TProcData[]>([])
+  const [cpuCount, setCpuCount] = useState(2)
+  const [cpuData, setCpuData] = useState<TCPUData[]>([])
+  const [tableValues,setTableValues] = useState<TProcData[][][]>([])
+
   const distribute = (cpuNumber: number, data: TProcData[]): TCPUData[] => {
     const cpus: TCPUData[] = []
   
@@ -93,12 +99,6 @@ const ProcessDistribution: FC = () => {
   
     return cpus
   }
-
-  const [procCount, setProcCount] = useState(10)
-  const [procData, setProcData] = useState<TProcData[]>([])
-  const [cpuCount, setCpuCount] = useState(2)
-  const [cpuData, setCpuData] = useState<TCPUData[]>([])
-  const [tableValues,setTableValues] = useState<TProcData[][][]>([])
 
   const onInputProcNumberChange = (value) => {
     if (value) {
