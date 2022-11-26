@@ -101,18 +101,21 @@ const ProcessDistribution: FC = () => {
   }
 
   const onInputProcNumberChange = (value) => {
+    setTableValues([])
     if (value) {
       setProcCount(value)
     }
   }
 
   const onInputCPUNumberChange = (value) => {
+    setTableValues([])
     if (value){
       setCpuCount(value)
     }
   };
 
   const changeProcLengthFactory = (index) => (value) => {
+    setTableValues([])
     setProcData((prevState) => {
       prevState[index].length = value
       return [...prevState]
