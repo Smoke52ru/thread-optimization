@@ -29,30 +29,6 @@ type TCPUData = {
   length: number,
 }
 
-const distribute = (cpuNumber: number, data: TProcData[]): TCPUData[] => {
-  const cpus: TCPUData[] = []
-
-  for (let i = 0; i < cpuNumber; i += 1) {
-    cpus.push({data: [], length: 0})
-  }
-
-  data.forEach((item) => {
-    let min = Infinity;
-    const minIndex = cpus.reduce((minLengthIndex, cpu, currentIndex) => {
-      if (cpu.length < min) {
-        min = cpu.length
-        return currentIndex
-      }
-      return minLengthIndex
-    }, 0)
-
-    cpus[minIndex].data.push(item)
-    cpus[minIndex].length += item.length
-  })
-
-  return cpus
-}
-
 const Process: FC<TProcessProps> = ({process}) => (
   <Tooltip title={`Процесс номер ${process.index}, время = ${process.length}`}>
     <span className='processBarItem'
@@ -79,10 +55,50 @@ const ProcessBar: FC<TProcessBarProps> = ({procData}) =>
   </div>
 
 const ProcessDistribution: FC = () => {
+  const distribute = (cpuNumber: number, data: TProcData[]): TCPUData[] => {
+    const cpus: TCPUData[] = []
+  
+    for (let i = 0; i < cpuNumber; i += 1) {
+      cpus.push({data: [], length: 0})
+    }
+  
+    data.forEach((item) => {
+      let min = Infinity;
+      const minIndex = cpus.reduce((minLengthIndex, cpu, currentIndex) => {
+        if (cpu.length < min) {
+          min = cpu.length
+          return currentIndex
+        }
+        return minLengthIndex
+      }, 0)
+  
+      cpus[minIndex].data.push(item)
+      cpus[minIndex].length += item.length
+  
+      setTableValues((prevState) => {
+        const res = [...prevState]
+        
+        res.push([...Array(cpuNumber)].map(()=>([])))
+        const last = res.reduce<TProcData[]>((prev, cur):TProcData[]=>{
+          if(cur[minIndex].length){
+            return cur[minIndex]
+          }
+          return prev
+        },[])
+        res.at(-1)![minIndex] = [...last, item]
+
+        return res
+      })
+    })
+  
+    return cpus
+  }
+
   const [procCount, setProcCount] = useState(10)
   const [procData, setProcData] = useState<TProcData[]>([])
   const [cpuCount, setCpuCount] = useState(2)
   const [cpuData, setCpuData] = useState<TCPUData[]>([])
+  const [tableValues,setTableValues] = useState<TProcData[][][]>([])
 
   const onInputProcNumberChange = (value) => {
     if (value) {
@@ -174,6 +190,16 @@ const ProcessDistribution: FC = () => {
             <ProcessBar procData={[...procData].sort((a,b)=>-(a.length-b.length))}/>
           </Panel>
         </Collapse>
+
+        <table>
+          {tableValues.map((row, index)=>(
+            <tr key={index}>
+              {row.map((cell)=>(
+                <td>{cell.join(',')}</td>
+              ))}
+            </tr>
+          ))}
+        </table>
 
         <Collapse defaultActiveKey='1'>
           {cpuData.length && cpuData.map((item, index) => (
