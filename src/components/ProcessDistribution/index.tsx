@@ -170,8 +170,8 @@ const ProcessDistribution: FC = () => {
         </Space>
 
         <Collapse defaultActiveKey='0'>
-          <Panel header='Все процессы' key='0'>
-            <ProcessBar procData={procData}/>
+          <Panel header='Все процессы (отсортированные)' key='0'>
+            <ProcessBar procData={[...procData].sort((a,b)=>-(a.length-b.length))}/>
           </Panel>
         </Collapse>
 
