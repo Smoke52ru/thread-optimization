@@ -85,11 +85,15 @@ const ProcessDistribution: FC = () => {
   const [cpuData, setCpuData] = useState<TCPUData[]>([])
 
   const onInputProcNumberChange = (value) => {
-    setProcCount(value)
+    if (value) {
+      setProcCount(value)
+    }
   }
 
   const onInputCPUNumberChange = (value) => {
-    setCpuCount(value)
+    if (value){
+      setCpuCount(value)
+    }
   };
 
   const changeProcLengthFactory = (index) => (value) => {
