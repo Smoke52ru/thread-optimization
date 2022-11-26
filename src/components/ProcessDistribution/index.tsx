@@ -192,7 +192,7 @@ const ProcessDistribution: FC = () => {
         </Collapse>
 
         <table className='table'>
-          {tableValues[0] && tableValues[0].map((_,index)=><th key={index}>`Процессор ${index+1}`</th>)}
+          {tableValues[0] && tableValues[0].map((_,index)=><th key={index}>Процессор {index+1}</th>)}
           {tableValues.map((row, index)=>(
             <tr key={index}>
               {row.map((cell)=>(
