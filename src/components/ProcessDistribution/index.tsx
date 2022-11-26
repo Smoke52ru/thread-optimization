@@ -191,7 +191,7 @@ const ProcessDistribution: FC = () => {
           </Panel>
         </Collapse>
 
-        <table>
+        <table className='table'>
           {tableValues.map((row, index)=>(
             <tr key={index}>
               {row.map((cell)=>(
